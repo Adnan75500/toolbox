@@ -95,7 +95,12 @@ export default function ImageCompressor() {
             min={0.1}
             max={5}
             step={0.1}
-            onValueChange={(v) => setMaxSizeMB(v[0])}
+            onValueChange={(v) => {
+              const next = v[0]
+              if (typeof next === "number" && Number.isFinite(next)) {
+                setMaxSizeMB(next)
+              }
+            }}
           />
         </div>
         <div>
@@ -103,7 +108,18 @@ export default function ImageCompressor() {
             <Label>Quality</Label>
             <span className="text-sm text-muted-foreground">{quality}%</span>
           </div>
-          <Slider value={[quality]} min={10} max={100} step={1} onValueChange={(v) => setQuality(v[0])} />
+          <Slider
+            value={[quality]}
+            min={10}
+            max={100}
+            step={1}
+            onValueChange={(v) => {
+              const next = v[0]
+              if (typeof next === "number" && Number.isFinite(next)) {
+                setQuality(next)
+              }
+            }}
+          />
         </div>
       </div>
 
